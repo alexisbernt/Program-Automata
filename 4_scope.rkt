@@ -90,7 +90,7 @@
 ; (check-eq? (i-need-closure) "inside")
 ; (check-eq? the-string "outside")
 
-; create a function to generate a custom username a string
+; PART 5: create a function to generate a custom username a string
 ; the create name should be in the following format: 
 ;   - a 3 digit random number
 ;   - separated by a hyphen 
@@ -98,6 +98,19 @@
 ;   - separated by a hyphen 
 ;   - followed by the same digits from above in reverse
 ;   - followed by the first letter in lower case
+
+; I wanted to learn how to get user input in racket
+(printf"\n ")
+(printf"Enter name: ")
+; ui stands for user input
+(define ui (read))
+(displayln ui) ; displaying the user input 
+; creating the custom-username
+(define (custom-username ui y)
+  ; bringing down contains same digits
+  (let ([digits-ui (sort (string->list (number->string ui)) char<?)]
+        [digits-y (sort (string->list (number->string y)) char<?)])
+       (equal? digits-ui digits-y)))
 ; (customerUserName "Tim")    = 687-TIM-786t
 ; (customerUserName "Cletus") = 083-CLETUS-380c
 ; (customerUserName {STUDENT_NAME}) = 083-{STUDENT_NAME}-380c
