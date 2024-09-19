@@ -99,18 +99,25 @@
 ;   - followed by the same digits from above in reverse
 ;   - followed by the first letter in lower case
 
+; creating the custom-username
+(define (customerUserName ui y)
+  ; a. convert the number to a string
+  (let ([digits-ui (sort (string->list (number->string ui)) char<?)]
+        [digits-y (sort (string->list (number->string y)) char<?)])
+       (equal? digits-ui digits-y)))
+  ; b. convert string to list
+  ; c. reverse the list
+  ; d. convert list to string
+  ; e. convert string to number
+
+(customerUserName 687 786)
+; (customerUserName "Tim" 687-TIM-786t)
+; (customerUserName "Cletus") = 083-CLETUS-380c
+; (customerUserName {STUDENT_NAME}) = 083-{STUDENT_NAME}-380c
+
 ; I wanted to learn how to get user input in racket
 (printf"\n ")
 (printf"Enter name: ")
 ; ui stands for user input
 (define ui (read))
 (displayln ui) ; displaying the user input 
-; creating the custom-username
-(define (custom-username ui y)
-  ; bringing down contains same digits
-  (let ([digits-ui (sort (string->list (number->string ui)) char<?)]
-        [digits-y (sort (string->list (number->string y)) char<?)])
-       (equal? digits-ui digits-y)))
-; (customerUserName "Tim")    = 687-TIM-786t
-; (customerUserName "Cletus") = 083-CLETUS-380c
-; (customerUserName {STUDENT_NAME}) = 083-{STUDENT_NAME}-380c
