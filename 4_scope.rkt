@@ -1,5 +1,6 @@
 #lang racket
 (require rackunit)
+(require math/number-theory)
 ; abstract procedures and how to simplify our program
 
 ; PART 1: refactor our isLogicalCompOperator function to have all logic/function in the same block scope, an example shown in video
@@ -13,8 +14,9 @@
 (check-true (isLogicalCompOperator? "not"))
 (check-false (isLogicalCompOperator? "if"))
 
+; you can displayln or printf to display in terminal
 (printf"Testing:\n")
-; ~a is a place holder for result of the function call (found in documentation)
+; ~a is a place holder for result of the function call (found in documentation and slides)
 (printf " 'and': ~a\n" (isLogicalCompOperator? "and"))
 (printf " 'or': ~a\n" (isLogicalCompOperator? "or"))
 (printf " 'not': ~a\n" (isLogicalCompOperator? "not"))
@@ -25,9 +27,12 @@
 
 ; PART 2: create a function to verify that two numbers contain the same digits
 (define (containsSameDigits? x y)
+  ; source: Used ChatGPT to go from number->string converting number to a string
   (let ([digits-x (sort (string->list (number->string x)) char<?)]
-        [digits-y (sort (string->list (number->string y)) char<?)])
-       (equal? digits-x digits-y)))
+        [digits-y (sort (string->list (number->string y)) char<?)]); using a list (converting string to list)
+       (equal? digits-x digits-y))) ; checking to see if digits are equal (from x and y)
+;checks 2
+(displayln "Testing 2: \n")
 (check-true (containsSameDigits? 356 365))
 (check-true (containsSameDigits? 123 321))
 (check-true (containsSameDigits? 6620 2606))
@@ -46,7 +51,7 @@
   ; starting by creating a divisible function
   (define (divisible? a b)
     (= (remainder a b) 0))
-  ; sqrt function from slides example
+  ; sqrt function from slides example (source: in-class slides on abstract procedures)
   (define (square x)    (* x x))
   (define (average x y) (/ (+ x y) 2))
   (define (sqrt x)
@@ -66,6 +71,7 @@
 (printf"\n " )
 (check-true (numPrime? 5))
 (check-false (numPrime? 10))
+(displayln "testing 3: ")
 ; ~a is a place holder for result of the function call (found in documentation)
 (printf " '5 is prime': ~a\n" (numPrime? 5))
 (printf " '10 is prime': ~a\n" (numPrime? 10))
@@ -86,6 +92,7 @@
    ;     [string-y (sort (string->list (number->string y)) char<?)])
     ;   (equal? digits-x digits-y)))
 (printf"\n " )
+(displayln "testing 4: ")
 (printf "Is 'outside' and 'inside' the same? ~a\n" (string=? "outside" "inside"))
 ; (check-eq? (i-need-closure) "inside")
 ; (check-eq? the-string "outside")
@@ -98,21 +105,34 @@
 ;   - separated by a hyphen 
 ;   - followed by the same digits from above in reverse
 ;   - followed by the first letter in lower case
-
+(printf"\n")
 ; creating the custom-username
-(define (customerUserName ui y)
-  ; a. convert the number to a string
-  (let ([digits-ui (sort (string->list (number->string ui)) char<?)]
-        [digits-y (sort (string->list (number->string y)) char<?)])
-       (equal? digits-ui digits-y)))
+(define (customerUserName ui)
+  ; source: learned string-append from ChatGPT
+  (define (getThreeNums) (random 100 999)) ; getting a 3 digit number btwn 100 and 999
+  (define numbs (getThreeNums))
+  (define numbs-str (number->string numbs)) ; function to convert number to string
+  (define (reverseNumbs numbs2) ; reverse function
+  (define numbsString (number->string numbs2)) ; a. converting the number to a string
   ; b. convert string to list
+  (define stringList (string->list numbsString))
   ; c. reverse the list
+  (define reverseList (reverse stringList))
   ; d. convert list to string
-  ; e. convert string to number
+  (define listString (list->string reverseList))
+  listString) ; return the reversed string (learned this type of return from a ChatGPT fix request
 
-(customerUserName 687 786)
-; (customerUserName "Tim" 687-TIM-786t)
-; (customerUserName "Cletus") = 083-CLETUS-380c
+ ; putting it all together
+ (string-append numbs-str "-" ui "-" (reverseNumbs numbs))) ; conver the numbs to a string to put the username in one string
+; ORIGINALLY TRIED:
+(display "-") ; putting the dash "-" between numbers and name
+(display customerUserName)
+(display "-") ; putting the dash "-" between numbers and name
+
+(displayln"\nTesting 5: ")
+(display (customerUserName "Timmy"))
+(printf "\nTim returns something like ~a\n" (customerUserName "Tim")) ; would return something like  687-TIM-786t
+(customerUserName "Cletus") ; would return something like 083-CLETUS-380c
 ; (customerUserName {STUDENT_NAME}) = 083-{STUDENT_NAME}-380c
 
 ; I wanted to learn how to get user input in racket
