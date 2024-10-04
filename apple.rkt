@@ -29,6 +29,8 @@
   (define (wordi x)
     (unless (zero? x)
       (printf "~a letters left\n" x)
+      (let ((char (integer->char x))) ; x is the character
+        (printf "char: ~a, w/Int: ~a\n" char (char->integer char))) ; trying to print char and the value
       (wordi (sub1 x)))) ; subtract 1 from word and then use recursion by calling word
 )
 
@@ -39,12 +41,12 @@
 ; recursively call and check the char in the string until the counter reaches its max
 
 ;(define (string-to-scalar str) ; str represents the string
-    ;;implement recursive function to return scalar value for each letter
-  ;(if (empty? str) ; checking to make sure string-to-scalar is not empty
+    ;implement recursive function to return scalar value for each letter
+  ;(if (eq? str '0) ; checking to make sure string-to-scalar is not empty
       ;'() ; if it is empty return an empty list
-      ;(char->integer (string-ref str 0))))
-      
-      ;;(string-to-scalar(str 1)))) ; using recursion to go through the rest of the list
+      ;(char->integer (str))))
+
+;(string-to-scalar wordi) ; using recursion to go through the rest of the list
   
 
 
