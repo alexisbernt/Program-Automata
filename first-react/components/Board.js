@@ -5,7 +5,9 @@ function Board() {
 
     return <div className="board">
         <Square/>
-    </div>
+        <Square/>
+
+        <Square/>    </div>
     return <div className="board">
         <Square/>
     </div>
