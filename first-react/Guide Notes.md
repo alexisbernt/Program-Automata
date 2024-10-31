@@ -2,7 +2,7 @@ To run React --> Open up Command Prompt
 
 Cd into directory
 
-Go into folder and type "npm start" in command prompt
+Go into folder and type "npm start" in command prompt or "npm run start"
 
 Window for React sample should then display
 
