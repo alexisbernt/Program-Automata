@@ -1,0 +1,20 @@
+const theGame = {
+
+// you will build a hash map and that will be a hashmap of choices 
+// you keep building this type of tree structure until the story is over:
+  
+  "A1: {
+    story: '....',
+    choice1: 'A1.1',
+    choice2: 'A1.2',
+}
+'A1.1': {
+  story: '....',
+    choice1: 'A1.1.1',
+    choice2: 'A1.2.1',
+}
+'A1.2.1': {
+  story: '....',
+    choice1: 'A1.1.1',
+    choice2: 'A1.2.2',
+}
