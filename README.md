@@ -7,7 +7,9 @@
   API will state the rules for how data is communicated/transferred. APIs exist as code, protocols, and interfaces—conceptual (abstract) rather than tangible (physical).
   API - interface that takes request and gives response
   Application provides a service. Web APIs HTTP response (has a response body with information - ex: json, xml, plain text). 
-- Hash Table = data structure used to insert, look up, and remove key-value pairs quickly. 
+- Hash Table = data structure used to insert, look up, and remove key-value pairs quickly.
+  You are programming a hash table to save time – you put the hash table within the code (ex: Python dictionary)
+  You can generate a hash that will generate an index (stores the key and the value at the index) 
 
 ## Purpose of this repo
 Introduction to Racket. Learning Racket Lisp-based Programming Language. Some web development as well. 
