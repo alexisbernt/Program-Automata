@@ -1,10 +1,10 @@
 #lang racket
 
 ; create the room class
-(struct room (name current a a-desc b b-desc c c-desc))
+(struct room (name content a a-desc b b-desc c c-desc))
 
 ; within the rooms we can access different components and then link to different parts of our story board wn the game
-(define A1
+(define A1 ; the finite state machine
   (room
    "Room 1"
    "things happen in room 1"
@@ -30,6 +30,10 @@
    )
   )
 
+; accessing things from Room 1
+(displayln(room-name A1))
+(displayln(room-a A1))
+
 ; function - think of this function as creating the story board 
 (define (the-story step) ; a "match system" that will return all the steps avaliable within the room 
   (match step
@@ -38,23 +42,36 @@
     [default A1])
   )
 
+(the-story "A1")
+(displayln(room-name (the-story "A1")))
+
 (define current(the-story "A1"))
 ; to create a hash map for that room 
 (define (story-to-hash current-room)
-  #hash(
+  '#hash(
    (name . ,(room-name current-room))
+   (content . ,(room-content current-room))
+   (a ., '#hash(
+           (step . , (room-a current-room))
+           (description . ,(room-a-desc current-room))
+           ))
+   (b ., '#hash(
+           (step . , (room-b current-room))
+           (description . ,(room-b-desc current-room))
+           ))
+   (c ., '#hash(
+           (step . , (room-c current-room))
+           (description . ,(room-c-desc current-room))
+           ))
    )
   )
 
 ; calling the hash function
 (story-to-hash current)
 
-(the-story "A1")
-(displayln(room-name (the-story "A1")))
-
-; accessing things from Room 1
-(displayln(room-name A1))
-(displayln(room-a A1))
-
 ; accessing things from Room 2
 (displayln(room-name B1))
+
+; exporting for using this file in other files 
+(provide the-story)
+(provide story-to-hash)
