@@ -79,7 +79,7 @@
   (define step (extract-binding/single 'step (request-bindings request)))
   (define current-room (the-story step))
   (define response-hash (story-to-hash current-room)) ; using helper function
-  (response/jsexpr response-hash #:code 202))
+  (response/jsexpr response-hash #:code 202 #:headers (list (header #"Access-Control-Allow-Origin" #"*"))))
 
 
 (define (home request)

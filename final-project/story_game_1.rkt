@@ -48,24 +48,23 @@
 (define current(the-story "A1"))
 ; to create a hash map for that room 
 (define (story-to-hash current-room)
-  '#hash(
+  `#hash(
    (name . ,(room-name current-room))
    (content . ,(room-content current-room))
-   (a ., '#hash(
+   (a ., `#hash(
            (step . , (room-a current-room))
            (description . ,(room-a-desc current-room))
            ))
-   (b ., '#hash(
+   (b ., `#hash(
            (step . , (room-b current-room))
            (description . ,(room-b-desc current-room))
            ))
-   (c ., '#hash(
+   (c ., `#hash(
            (step . , (room-c current-room))
            (description . ,(room-c-desc current-room))
            ))
-   )
+)
   )
-
 ; calling the hash function
 (story-to-hash current)
 
