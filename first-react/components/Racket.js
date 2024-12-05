@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { getStep } from "../service";
 
 export function Racket({ item }) {
     const [loading, setLoading] = useState(false);
@@ -7,14 +8,8 @@ export function Racket({ item }) {
     async function getData() {
         setLoading(true);
         try {
-            const response = await fetch('http://localhost:8008/hello', {
-                // mode: 'no-cors'
-                // http://localhost:8008/hello
-            });
-            if (!response.ok) {
-                throw new Error(`Response status: ${response.status}`);
-            }
-            const json = await response.json();
+            const json = await getStep('A1');
+            console.log(json);
             setProfile(json);
             setLoading(false);
         } catch (error) {
