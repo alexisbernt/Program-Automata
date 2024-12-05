@@ -16,7 +16,7 @@ function App() {
        {showBoxes && <Board />}
        {/* /* // && is a way to commend out  */ }
        {false && <PokemonList/> } 
-       {false && <Racket/>}
+       {true && <Racket/>}
        <Blink/>
     </div>
   );
