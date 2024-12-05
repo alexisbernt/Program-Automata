@@ -1,8 +1,14 @@
 #lang racket
+(require racket/include)
 (require web-server/servlet
          web-server/servlet-env
          web-server/http/json)
 
+; working server should be:
+; http://localhost:8008/story/step?step=A1
+
+; require your story file
+(require "story_game_1.rkt") ; if not in same folder than hardcode the path 
 
 (define (make-app-state count name) ; create a class and then have helper functions to set or get the state of the state machine
 
@@ -68,23 +74,12 @@
                    #:code 202
                    ))
 
-
-(define (hello request)
-  (define response-hash `#hash(
-                          (name . ,((app'get-name)))
-                          (age . ,22)
-                          (count . ,((app'get-count)))
-                          ))
-  (define headers (list (make-header #"Access-Control-Allow-Origin" #"http://localhost:3000")))
-  (displayln ((app'get-count)))
-  ((app'inc-count))
-
-  (response/jsexpr
-    response-hash
-    #:headers headers
-    #:code 200
-  )
-)
+(define (story/step request)
+  (define binds(request-bindings/raw request))
+  (define step (extract-binding/single 'step (request-bindings request)))
+  (define current-room (the-story step))
+  (define response-hash (story-to-hash current-room)) ; using helper function
+  (response/jsexpr response-hash #:code 202 #:headers (list (header #"Access-Control-Allow-Origin" #"*"))))
 
 
 (define (home request)
@@ -97,8 +92,9 @@
 (define-values (service-dispatch service-url)
   (dispatch-rules
    (("") #:method "get" home)
-   (("hello") #:method "get" hello)
+   (("hello") #:method "get" home)
    (("hello" "echo") #:method "get" hello/echo)
+   (("story" "step") #:method "get" story/step)
    (else not-found))
   )
 
