@@ -1,16 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState} from "react";
 import { getStep } from "../service";
+import StepButton from "./StepButton";
 
-export function Racket({ item }) {
-    const [loading, setLoading] = useState(false);
-    const [profile, setProfile] = useState();
+export function Racket({item }) {
+    const [loading, setLoading] = useState(true);
+    const [step, setStep] = useState();
+    const [steps, setSteps] = useState([]);
 
-    async function getData() {
-        setLoading(true);
+    async function getData(step) {
         try {
-            const json = await getStep('A1');
+            const json = await getStep(step);
             console.log(json);
-            setProfile(json);
+            setStep(json);
+            setSteps([...steps, step]); // merging arrays 
             setLoading(false);
         } catch (error) {
             console.error(error.message);
@@ -18,11 +20,43 @@ export function Racket({ item }) {
     }
 
     useEffect(() => {
-        getData();
+        getData('A1');
     }, [])
 
+    if (!step){
+        return <div> You failed.</div>
+    }
+
     return <div>
-        {profile && profile.name}
+
+        <h4>{step.name}</h4>
+        <p>{step.content}</p>
+
+        <StepButton 
+            step={step.a.step} 
+            description={step.a.description}
+            onClickEvent = {getData}
+        />
+        <StepButton 
+            step={step.b.step} 
+            description={step.b.description}
+            onClickEvent = {getData}
+        />
+
+        <StepButton 
+            step={step.c.step} 
+            description={step.c.description}
+            onClickEvent = {getData}
+        />
+
+
+        <div>
+            {steps.map((step, index) => {
+                return <span onClick={() => {
+                    getData(step);
+                }} className="step-tag" key={index}>{step}</span>
+            })}
+        </div>
     </div>
 }
 
