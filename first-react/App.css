@@ -42,3 +42,10 @@
   width: 100px;
   display: inline-block;
 }
+
+.step-tag {
+  background-color: light blue ;
+  padding: 4px;
+  border-radius: 2px;
+  margin: 4px;
+}
