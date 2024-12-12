@@ -9,11 +9,11 @@
    "Room 1"
    "things happen in room 1"
    "B1"
-   "b1 choice"
+   "B1 choice"
    "C1"
-   "c1 choice"
-   " ... "
-   ""
+   "C1 choice"
+   "D1"
+   "D1 choice"
    )
   )
 
@@ -24,12 +24,38 @@
    "A1"
    "choice to go back to A1"
    "C1"
-   "c1 choice"
-   " ... "
+   "C1 choice"
    "D1"
+   "D1 choice"
    )
   )
 
+
+(define C1
+  (room
+   "Room 3"
+   "things happen in room 3"
+   "A1"
+   "choice to go back to A1"
+   "B1"
+   "choice to go back to B1"
+   "D1"
+   "D1 choice"
+   )
+  )
+
+(define D1
+  (room
+   "Room 4"
+   "things happen in room 4"
+   "A1"
+   "choice to go back to A1"
+   "B1"
+   "choice to go back to B1"
+   "C1"
+   "choice to go back to C1"
+   )
+  )
 ; accessing things from Room 1
 (displayln(room-name A1))
 (displayln(room-a A1))
@@ -39,6 +65,8 @@
   (match step
     ["A1" A1]
     ["B1" B1]
+    ["C1" C1]
+    ["D1" D1]
     [default A1])
   )
 
