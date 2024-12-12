@@ -27,7 +27,9 @@ export function Racket({item }) {
         return <div> You failed.</div>
     }
 
-    return <div>
+    return <div className="cyoa-container">
+
+        {/* <h4 style ={{color: 'light blue'}} */}
 
         <h4>{step.name}</h4>
         <p>{step.content}</p>
