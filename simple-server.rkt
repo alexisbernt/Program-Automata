@@ -86,7 +86,7 @@
   (response/xexpr
    `(html
      (body
-      (h1 "Hello World"))))
+      (h1 "Punny Muffin Game"))))
   )
 
 (define-values (service-dispatch service-url)
