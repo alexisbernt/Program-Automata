@@ -14,7 +14,7 @@ function App() {
        <Header />
        <Config showBoxes={showBoxes} setShowBoxes={setShowBoxes}/>
        {showBoxes && <Board />}
-       {/* /* // && is a way to commend out  */ }
+       {/* /* // is a way to commend out and && is the logical AND */ }
        {false && <PokemonList/> } 
        {true && <Racket/>}
        <Blink/>
